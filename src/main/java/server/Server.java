@@ -27,14 +27,15 @@ public class Server {
             while (true) {
                 socket = server.accept();
                 System.out.println("Клиент подключился");
-
                 new ClientHandler(this, socket);
+
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
+                authService.disconnect();
                 server.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -66,7 +67,6 @@ public class Server {
                 return;
             }
         }
-
         sender.sendMsg("not found user: " + receiver);
     }
 
