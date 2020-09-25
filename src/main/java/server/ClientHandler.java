@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.sql.SQLException;
 
 
 public class ClientHandler {
@@ -71,7 +72,6 @@ public class ClientHandler {
                                 sendMsg("/regno");
                             }
                         }
-
                     }
 
                     //цикл работы
@@ -101,6 +101,8 @@ public class ClientHandler {
                     System.out.println("Клиент отключен по таймауту");
                 } catch (IOException e) {
                     e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
                 } finally {
                     System.out.println("Клиент отключился");
                     server.unsubscribe(this);
@@ -132,7 +134,5 @@ public class ClientHandler {
     public String getLogin() {
         return login;
     }
-
-
 }
 
